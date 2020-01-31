@@ -3,6 +3,7 @@ baseURL = "https://blog.chungman.kim"
 languageCode = "en-us"
 googleAnalytics = "UA-157392301-1"
 theme = "ananke"
+themesDir = "../.."
 
 [permalinks]
   posts = "/:year/:month/:title/"
