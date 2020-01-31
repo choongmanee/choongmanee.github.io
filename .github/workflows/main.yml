@@ -10,14 +10,13 @@ jobs:
     runs-on: ubuntu-18.04
     steps:
       - uses: actions/checkout@v2
+        with:
+          submodules: true
 
       - name: Setup Hugo
         uses: peaceiris/actions-hugo@v2.4.4
         with:
           hugo-version: '0.63.2'
-
-      - name: Get Hugo Theme
-        run: cd themes && git clone https://github.com/Vimux/blank.git
 
       - name: Build
         run: hugo --gc --minify --cleanDestinationDir
