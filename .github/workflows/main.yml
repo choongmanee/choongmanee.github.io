@@ -17,7 +17,7 @@ jobs:
           hugo-version: '0.63.2'
 
       - name: Get Hugo Theme
-        run: cd themes && git clone https://github.com/budparr/gohugo-theme-ananke.git
+        run: cd themes && pwd && git clone https://github.com/budparr/gohugo-theme-ananke.git
 
       - name: Build
         run: hugo --gc --minify --cleanDestinationDir
