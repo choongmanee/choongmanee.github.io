@@ -2,7 +2,7 @@ title = "blog.chungman.kim"
 baseURL = "https://blog.chungman.kim"
 languageCode = "en-us"
 googleAnalytics = "UA-157392301-1"
-theme = "ananke"
+theme = "ananke @ 878bb9b"
 themesDir = "../.."
 
 [permalinks]
