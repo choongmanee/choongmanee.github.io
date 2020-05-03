@@ -1,2 +1,2 @@
 # choongmanee.github.io
-https://blog.chungman.kim
+https://chungman.kim

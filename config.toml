@@ -1,5 +1,5 @@
-title = "blog.chungman.kim"
-baseURL = "https://blog.chungman.kim"
+title = "chungman.kim"
+baseURL = "https://chungman.kim"
 languageCode = "en-us"
 googleAnalytics = "UA-157392301-1"
 theme = "ananke"
@@ -9,7 +9,7 @@ theme = "ananke"
 
 [params]
   favicon = ""
-  description = "blog.chungman.kim"
+  description = "chungman.kim"
   facebook = ""
   twitter = ""
   instagram = ""
