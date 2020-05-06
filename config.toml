@@ -25,3 +25,4 @@ theme = "ananke"
   featured_image = "/images/hero.jpg"
   author = "chungman kim"
   show_reading_time = true
+  assets = 'https://assets.chungman.kim'

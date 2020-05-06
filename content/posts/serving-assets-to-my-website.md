@@ -24,3 +24,4 @@ create cloudfront distribution
 add a file
 test
 
+{{<img src="hero.jpg" alt="sample">}}
