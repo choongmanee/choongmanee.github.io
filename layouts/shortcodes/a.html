@@ -1,0 +1,3 @@
+{{$target := default "_blank" (.Get "target")}}
+
+<a href="{{.Get "href"}}" target={{$target}}>{{.Get "title"}}</a>
