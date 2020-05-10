@@ -10,8 +10,9 @@ As for what I have in mind with this blog, I want to visually capture steps that
  
 ## Considerations
 The fact that you're reading this post is a good indicator that this page loaded in a reasonable amount of time. 
-[Fast Company][1] wrote an interesting article on how load times can be a critical factor to Amazon's sales and
- Google's search results. With that to keep in mind, here is my wishlist.
+{{<a href="https://www.fastcompany.com/1825005/how-one-second-could-cost-amazon-16-billion-sales" title="Fast Company">}}
+reported that load times can be a critical factor to Amazon's sales and Google's search results. With that to
+ keep in mind, here is my wishlist.
 
 1. Low cost storage
 1. Expandable storage
@@ -25,32 +26,67 @@ The fact that you're reading this post is a good indicator that this page loaded
 1. Fast content delivery
 1. Configurable with my domain
 
-In a nutshell, I'm looking to have a Content Delivery Network with an outstanding storage offering.
+In a nutshell, I'm looking to have a content delivery network(CDN) with an outstanding storage offering.
 
 ## Using AWS
 
-As of this post, I have two AWS Certifications, Cloud Practitioner and Developer Associate, and a two years of hands-on
- AWS experience.
- 
-The table below lists what I did with which service in chronological order:
-(This table assumes [IAM][iam] and that your domain is in AWS. If you )
+The table below lists what I did with which service:  
+*Some familiarity with AWS and the AWS Console is assumed*
 
-| #     | Action | Route 53 | Certificate Manager | S3  | Cloudfront |
-| :---: | ------ | :---: | :---: | :---: | :---: |
-| 1     | Get a secure certificate |  | X |||
+| Action                                           | Route 53 | Certificate Manager | S3  | Cloudfront |
+|--------------------------------------------------|:--------:|:-------------------:|:---:|:----------:|
+| Have my domain in Route 53                       | x        |                     |     |            |
+| Get a secure certificate for HTTPS               | o        | x                   |     |            |
+| Create a S3 bucket                               |          |                     | x   |            |
+| Create a Cloudfront distribution of my S3 bucket |          |                     | o   | x          |
+| Add a new record for my Cloudfront distribution  | x        |                     |     | o          |
+
+x: Primary AWS service; o: Related AWS service
+
+### Have my domain in Route 53
+1. From AWS Console, navigate to Route 53
+    {{<img src="aws-route53-search.png" alt="search query for Route 53">}}
+2. Go to **Domains** in the left panel and confirm `youdomain.com` is listed
+    {{<img src="aws-route53-domain-listing.png" alt="list of domains in route 53">}}
+    - If you don't have a registered domain, purchase a domain by clicking the **Register Domain** button
+
+### Get a secure certificate for HTTPS
+1. Click on **Services** in the header drop and type **Certificate Manager** in the search, follow the top suggestion
+1. Start a request for a certificate by clicking on the **Request a certificate** button
+    {{<img src="aws-certificate-manager-request-certificate-buttons.png" alt="request a certificate button in AWS Certificate Manager">}}
+    
+    [!] Note the region you are working from provided in the header. Certificates are in the region from which
+     they were initially requested.
+    {{<img src="aws-certificate-manager-nav.png" alt="region in AWS header">}}
+1. Select **Request a public certificate** and click **Request a certificate**
+1. Complete the request process
+    1. _Add domain names_:
+        1. Enter `yourdomain.com` and click **Add another name to this certificate**
+        1. Enter `*.yourdomain.com` and click **Next**
+        {{<img src="aws-certificate-manager-flow1.png" alt="add domain names">}}
+    1. _Select validation method_:
+        1. Select **DNS validation** and click **Next**
+    1. _Add Tags_:
+        1. Enter as many tags as you'd like or none. Tags are similar to labels on AWS resources, can be used to
+         communicate
+         to other users about this resource, and a means for tracking costs.
+    1. _Review_:
+        1. Review for the following and click **Confirm and request** if everything looks right
+            1. **Domain name**: `yourdomain.com`
+            1. **Additional name**: `*.yourdomain.com`
+            1. **Validation method**: `DNS`
+    1. _Validation_:
+        1. This process may take a few hours but generally completes in 15 minutes. While it validates, do the
+         following:
+            1. Click on each row below the column **Domain** and click the blue **Create record in Route 53** button
+            {{<img src="aws-certificate-manager-flow5.png" alt="validation">}}
+            1. In the pop-up modal, click **Create**
+        
+        
 
 
 
-### Securing traffic with [Certificate Manager][2]
-
-From the Certificate Manager website:
-> AWS Certificate Manager is a service that lets you easily provision, manage, and deploy public and private Secure
-> Sockets Layer/Transport Layer Security (SSL/TLS) certificates for use with AWS services and your internal connected
-> resources. SSL/TLS certificates are used to secure network communications and establish the identity of websites
-> over the Internet as well as resources on private networks. AWS Certificate Manager removes the time-consuming
-> manual process of purchasing, uploading, and renewing SSL/TLS certificates.
-
-1. 
+1. Navigate
 read this first
 https://aws.amazon.com/blogs/networking-and-content-delivery/amazon-s3-amazon-cloudfront-a-match-made-in-the-cloud/
 understand this next
@@ -74,5 +110,4 @@ test
 {{<img src="hero.jpg" alt="sample">}}
 
 [1]: https://www.fastcompany.com/1825005/how-one-second-could-cost-amazon-16-billion-sales
-[iam]: https://aws.amazon.com/iam/
 [2]: https://aws.amazon.com/certificate-manager/
