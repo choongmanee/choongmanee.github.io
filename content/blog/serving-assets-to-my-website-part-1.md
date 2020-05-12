@@ -2,6 +2,13 @@
 title: "Serving Assets to My Website Part 1"
 date: 2020-05-09T17:48:30-07:00
 draft: false
+tags: 
+- aws
+- s3
+- route53
+- cloudfront
+- certificate manager
+- cdn
 ---
 
 Serving assets, such as images and documents, to be accessible to end users is essential to a modern web experience. 
@@ -93,6 +100,7 @@ x: Primary AWS service; o: Related AWS service
 1. Verify the request in the table for `yourDomain.com` and it's status is either **Issued** or **Pending**
     {{<img src="aws-certificate-manager-request-complete.png" alt="complete request">}}
     
-In Part 2, we'll create a S3 bucket.
+In [Part 2]({{< ref "posts/serving-assets-to-my-website-part-2" >}}), we'll create a S3 bucket.  
+
     
 If you like this post, please feel free to support me.
