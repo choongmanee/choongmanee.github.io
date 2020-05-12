@@ -98,9 +98,8 @@ x: Primary AWS service; o: Related AWS service
             1. In the pop-up modal, click **Create**
         1. Click **Continue**
 1. Verify the request in the table for `yourDomain.com` and it's status is either **Issued** or **Pending**
-    {{<img src="aws-certificate-manager-request-complete.png" alt="complete request">}}
+    {{<img src="aws-certificate-manager-complete-request.png" alt="complete request">}}
     
-In [Part 2]({{< ref "posts/serving-assets-to-my-website-part-2" >}}), we'll create a S3 bucket.  
-
+In Part 2, we'll create a S3 bucket.
     
 If you like this post, please feel free to support me.
