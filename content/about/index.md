@@ -6,7 +6,7 @@ draft: false
 
 hello and welcome,
 
-i'm a software engineer working in the san francisco.
+i'm a software engineer working in san francisco, ca.
 
 https://github.com/choongmanee  
 https://www.linkedin.com/in/chungmankim/
