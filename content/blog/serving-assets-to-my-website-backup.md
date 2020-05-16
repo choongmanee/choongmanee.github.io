@@ -1,22 +1,12 @@
 ---
-title: "Serving Assets to My Website Part 1"
-date: 2020-05-09T17:48:30-07:00
-draft: false
-tags: 
-- aws
-- s3
-- route53
-- cloudfront
-- certificate manager
-- cdn
+title: "Serving Assets to My Website"
+date: 2020-05-03T23:05:19-07:00
+draft: true
 ---
 
 Serving assets, such as images and documents, to be accessible to end users is essential to a modern web experience. 
 As for what I have in mind with this blog, I want to visually capture steps that I took to help jog my memory of
- what I did or learned. 
- 
-Setting this up took me 30 minutes the first time. The steps are split into a series of posts to keep the posts short
- and organized.
+ what I did or learned. Evidently, here is an explanation of how I am hosting and serving my assets.
  
 ## Considerations
 The fact that you're reading this post is a good indicator that this page loaded in a reasonable amount of time. 
@@ -38,8 +28,7 @@ reported that load times can be a critical factor to Amazon's sales and Google's
 
 In a nutshell, I'm looking to have a content delivery network(CDN) with an outstanding storage offering.
 
-## Using AWS to configure my CDN
-
+## Using AWS
 
 The table below lists what I did with which service:  
 *Some familiarity with AWS and the AWS Console is assumed*
@@ -63,9 +52,6 @@ x: Primary AWS service; o: Related AWS service
 
 ### Get a secure certificate for HTTPS
 1. Click on **Services** in the header drop and type **Certificate Manager** in the search, follow the top suggestion
-1. If you don't have any provisioned certificates, click **Get Started** under **Provision Certificates**.
-    - If you have provisioned certificates but don't see any listed, navigate to the region where your provisioned
-     certificates are listed.
 1. Start a request for a certificate by clicking on the **Request a certificate** button
     {{<img src="aws-certificate-manager-request-certificate-buttons.png" alt="request a certificate button in AWS Certificate Manager">}}
     
@@ -85,21 +71,43 @@ x: Primary AWS service; o: Related AWS service
          communicate
          to other users about this resource, and a means for tracking costs.
     1. _Review_:
-        1. Review for the following
+        1. Review for the following and click **Confirm and request** if everything looks right
             1. **Domain name**: `yourdomain.com`
             1. **Additional name**: `*.yourdomain.com`
             1. **Validation method**: `DNS`
-        1. Click **Confirm and request** if everything looks right
     1. _Validation_:
-        1. This process may take a few hours but generally completes in 15 minutes. While it validates, expand each
-         row under **Domain** and perform the following:
-            1. Click the blue **Create record in Route 53** button
+        1. This process may take a few hours but generally completes in 15 minutes. While it validates, do the
+         following:
+            1. Click on each row below the column **Domain** and click the blue **Create record in Route 53** button
             {{<img src="aws-certificate-manager-flow5.png" alt="validation">}}
             1. In the pop-up modal, click **Create**
-        1. Click **Continue**
-1. Verify the request in the table for `yourDomain.com` and it's status is either **Issued** or **Pending**
-    {{<img src="aws-certificate-manager-complete-request.png" alt="complete request">}}
-    
-In Part 2, we'll create a S3 bucket.
-    
-If you like this post, please feel free to support me.
+        
+        
+
+
+
+1. Navigate
+read this first
+https://aws.amazon.com/blogs/networking-and-content-delivery/amazon-s3-amazon-cloudfront-a-match-made-in-the-cloud/
+understand this next
+https://docs.aws.amazon.com/AmazonCloudFront/latest/DeveloperGuide/private-content-restricting-access-to-s3.html
+
+brainstorm
+create cdn for fast delivery
+store files with high durability
+keep costs low with low cost storage and even lower cost retrieval
+limit access to s3 bucket to only cf
+provide an alias for cf endpoint
+
+steps:
+get a certificate
+create a subdomain with route 53
+create bucket in s3
+create cloudfront distribution
+add a file
+test
+
+{{<img src="hero.jpg" alt="sample">}}
+
+[1]: https://www.fastcompany.com/1825005/how-one-second-could-cost-amazon-16-billion-sales
+[2]: https://aws.amazon.com/certificate-manager/
