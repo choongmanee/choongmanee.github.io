@@ -104,7 +104,7 @@ x: Primary AWS service; o: Related AWS service
 1. Click on **Services** in the header drop and type **S3** in the search, follow the top suggestion
 1. Click on **Create bucket** to start a bucket creation process
 1. Under **General configuration**:
-    1. Enter a *unique* bucket name
+    1. Enter a *unique* bucket name. You'll need this bucket name for setting up your Cloudfront distribution
     1. Choose a region. General good practice is to select a region that is closest in proximity but also consider
      the availability zones in the region.
 1. Under **Bucket settings for Block Public Access**
@@ -114,7 +114,28 @@ x: Primary AWS service; o: Related AWS service
 1. Click on **Create bucket**
 
 ### Create a Cloudfront distribution for a S3 bucket
---- work in progress
+
+1. Click on **Services** in the header drop and navigate to **Cloudfront**
+1. Click on **Create Distribution**
+1. Click on **Get Started** under **Web**
+1. Under **Origin Settings**
+    1. **Origin Domain Name**: `Your S3 Bucket`
+    1. **Restrict Bucket Access**: `Yes`
+    1. **Origin Access Identity**: `Create a New Identity`
+    1. **Comment**: Enter a description for the created **Origin Access Identity**
+    1. **Grant Read Permissions on Bucket**: `Yes`
+1. Under **Default Cache Behavior Settings**
+    1. **Viewer Protocol Policy**: `Redirect HTTP to HTTPS`
+    1. **Compress Objects Automatically**: `Yes`
+1. Under **Distribution Settings**
+    1. **Alternate Domain Names(CNAMEs)**: Enter `yourdomain.com` or whichever subdomain you want your assets to be
+     served from.
+    1. **SSL Certificate**: 
+        1. Select `Custom SSL Certificate`
+        1. In the input, you should see your secure certificate for `yourdomain.com`. Select that.
+1. Click **Create Distribution**. You should see a **pending** status for your distribution. You may have to wait up
+ to 15 minutes for your distribution to be created or propogate.
+
 ### Add a new record in Route 53 for you Cloudfront distribution
 --- work in progress
     
