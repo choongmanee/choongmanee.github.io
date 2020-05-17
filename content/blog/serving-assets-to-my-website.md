@@ -100,6 +100,7 @@ x: Primary AWS service; o: Related AWS service
     {{<img src="aws-certificate-manager-complete-request.png" alt="complete request">}}
 
 ### Create a S3 bucket
+A bucket behaves like a file directory.
 
 1. Click on **Services** in the header drop and type **S3** in the search, follow the top suggestion
 1. Click on **Create bucket** to start a bucket creation process
@@ -119,7 +120,7 @@ x: Primary AWS service; o: Related AWS service
 1. Click on **Create Distribution**
 1. Click on **Get Started** under **Web**
 1. Under **Origin Settings**
-    1. **Origin Domain Name**: `Your S3 Bucket`
+    1. **Origin Domain Name**: Select the S3 bucket you want to distribute from
     1. **Restrict Bucket Access**: `Yes`
     1. **Origin Access Identity**: `Create a New Identity`
     1. **Comment**: Enter a description for the created **Origin Access Identity**
