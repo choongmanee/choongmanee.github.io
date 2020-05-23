@@ -43,13 +43,13 @@ In a nutshell, I'm looking to have a content delivery network(CDN) with an outst
 The table below lists what I did with which service:  
 *Some familiarity with AWS and the AWS Console is assumed*
 
-| Action                                           | Route 53 | Certificate Manager | S3  | Cloudfront |
+| Action                                           | Route 53 | Certificate Manager | S3  | CloudFront |
 |--------------------------------------------------|:--------:|:-------------------:|:---:|:----------:|
 | Have my domain in Route 53                       | x        |                     |     |            |
 | Get a secure certificate for HTTPS               | o        | x                   |     |            |
 | Create a S3 bucket                               |          |                     | x   |            |
-| Create a Cloudfront distribution of my S3 bucket |          |                     | o   | x          |
-| Add a new record for my Cloudfront distribution  | x        |                     |     | o          |
+| Create a CloudFront distribution of my S3 bucket |          |                     | o   | x          |
+| Add a new record for my CloudFront distribution  | x        |                     |     | o          |
 
 x: Primary AWS service; o: Related AWS service
 
@@ -105,18 +105,18 @@ A bucket behaves like a file directory.
 1. Click on **Services** in the header drop and type **S3** in the search, follow the top suggestion
 1. Click on **Create bucket** to start a bucket creation process
 1. Under **General configuration**:
-    1. Enter a *unique* bucket name. You'll need this bucket name for setting up your Cloudfront distribution
+    1. Enter a *unique* bucket name. You'll need this bucket name for setting up your CloudFront distribution
     1. Choose a region. General good practice is to select a region that is closest in proximity but also consider
      the availability zones in the region.
 1. Under **Bucket settings for Block Public Access**
     1. Keep **Block all public access** checked. This protects your S3 bucket from being exposed to requests to the
-     public. In the next section, we'll conigure Cloudfront to have access to your S3 and be responsible for
+     public. In the next section, we'll conigure CloudFront to have access to your S3 and be responsible for
       distributing your assets.
 1. Click on **Create bucket**
 
-### Create a Cloudfront distribution for a S3 bucket
+### Create a CloudFront distribution for a S3 bucket
 
-1. Click on **Services** in the header drop and navigate to **Cloudfront**
+1. Click on **Services** in the header drop and navigate to **CloudFront**
 1. Click on **Create Distribution**
 1. Click on **Get Started** under **Web**
 1. Under **Origin Settings**
@@ -135,9 +135,25 @@ A bucket behaves like a file directory.
         1. Select `Custom SSL Certificate`
         1. In the input, you should see your secure certificate for `yourdomain.com`. Select that.
 1. Click **Create Distribution**. You should see a **pending** status for your distribution. You may have to wait up
- to 15 minutes for your distribution to be created or propogate.
+ to 15 minutes for your distribution to be created or propagate.
 
-### Add a new record in Route 53 for you Cloudfront distribution
---- work in progress
-    
-If you like this post, please feel free to support me.
+Your S3 bucket items can now be retrieved from the distribution's **Domain Name** (<a mix of characters>.cloudfront
+.net).
+
+Remember your **Domain Name** for the next step to configure your custom domain to distribute your S3 bucket items.
+
+### Add a record in Route 53 for you CloudFront distribution
+1. Click on **Services** in the header drop and navigate to **Route 53**
+1. Click on **Hosted Zones** in hte left navigation panel
+1. Click on the domain name your CloudFront distribution will serve from
+1. Click on **Create Record Set**
+    1. **Name**:
+        1. Leave as blank if you want to use your domain OR
+        1. Enter the name of your subdomain here (yoursubdomain.yourdomain.com)
+    1. **Type**: `A - IPv4 address`
+    1. **Alias**: `Yes`
+    1. **Alias Target**: Click and scroll down to CloudFront distributions. Select your recently created
+     CloudFront distribution.
+    1. Leave the remaining values as default
+    1. Click **Save Record Set**
+    1. Wait up to 5 minutes to test your set up by going to `http://yourdomain.com/pathToS3BucketItem`
